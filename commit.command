@@ -1,2 +1,3 @@
 git add -A
-git commit -a -m $(date)
+git commit -a
+git push origin master
