@@ -12,7 +12,7 @@ installPath1 = ""
 installPath2 = ""
 version = ""
 isWorking = True
-inp = "none"
+letter = "none"
 current = 0
 op =""
 program1 =""
@@ -73,64 +73,10 @@ try:
 except:
     window("Uh oh!","Looks like you don't have one of these","modules. Please ensure all of them are installed:","colorama ,playsound","To install module: 1. Insert diskette","2. Type 'pip install *module name*")
 
-def inputCheck(letter):
-    try:letter = letter.lower() 
-    except:do_nothing()
-    if letter == "c" or letter == "close" :
-        if current != 3 or current != 7:
-            keyC()
-        else:
-            keyESC()
-    elif letter == "up" or letter == "u":
-        arrowUp()
-    elif letter == "down" or letter == "d":
-        arrowDown()
-    elif letter == "1":
-        number1()
-    elif letter == "2":
-        number2()
-    elif letter == "3":
-        number3()
-    elif letter == "4":
-        number4()
-    elif letter == "5":
-        number5()
-    elif letter == "h" or letter == "help":
-        keyH()
-    elif letter == "p" or letter == "progs" or letter == "programs":
-        keyP()
-    elif letter == "s" or letter == "shutdown" or letter == "r" or letter == "reboot":
-        shutdown()
-
-def shutdown():
-    ask = textInput("Required confirmation","(S)hutdown/(R)eboot?")
-    try:ask = ask.lower()
-    except:do_nothing()
-    if ask == "s" or ask == "shutdown":
-        isWorking = False           
-        machineWorking = False
-        window("","Shutting down...","")
-        sleep(3)
-    elif ask == "r" or ask == "reboot":
-        isWorking = False
-        window("","Rebooting...","")
-        sleep(3)
     
 
-def keyH():
-    if current == 0:
-        window("Buttons to push","Up/Down : select","c : close stuff","s : shutdown","h : help in programs")
-        sleep(10)
-        input("Hit Enter")
-    elif current == 2:
-        window("Help for Calculator","Select item to change (Up/Down keys)","Use Enter/Return key to edit.","Credits : Luigi180059","          aka Luigi64-Dev")
-        sleep(10)
-        input("Hit dat Enter button!")
-    elif current == 5:
-        window("Help for Settings, please!","a : approve", "d : deny", "c : close window")
-        sleep(10)
-        input("Press Enter/Return")
-    
+
+"""
 def keyESC():
     if current == 3:
         if executingNow == 0:
@@ -181,324 +127,9 @@ def keyESC():
             elif program2 == "SP":
                 current = 5
             elif program2 == "Settings":
-                current = 6    
-
-def keyP():
-    current = 3
-
-def keyC():
-    if current == 3:
-                    if executingNow == 0:
-                        current = 0
-                    elif executingNow == 1:
-                        if program1 == "About":
-                            currrent = 1
-                        elif program1 == "Calc":
-                            current = 2
-                        elif program1 == "Upgrade":
-                            current = 4
-                        elif program1 == "SP":
-                            current = 5
-                        elif program1 == "Settings":
-                            current = 6
-                    elif executingNow == 2:
-                        if program2 == "About":
-                            currrent = 1
-                        elif program2 == "Calc":
-                            current = 2
-                        elif program2 == "Upgrade":
-                            current = 4
-                        elif program2 == "DevCity":
-                            current = 5
-                        elif program2 == "SP":
-                            current = 6
-    elif current == 5:
-                alreadyChecked = False
-                if current != 0 and current !=2:
-                    current = 0
-                    if executingNow == 1:
-                        executingNow = 0
-                        if program2 != "":
-                            program1 = program2
-                            program2 = ""
-                        else:
-                            program1 = ""
-                        
-                elif current == 2:
-                    current = 0
-                    num1 = 0
-                    num2 = 0
-                    operation = "+"
-                    if executingNow == 1:
-                        executingNow = 0
-                        if program2 != "":
-                            program1 = program2
-                            program2 = ""
-                        else:
-                            program1 = ""            
-                else:
-                    ask = textInput("Required confirmation","Shutdown system?(Y/N)")
-                    if ask == "Y" or ask == "y":
-                        isWorking = False
-                        
-                        machineWorking = False
-                    else:
-                        print("Canceled.")
-
-def arrowDown():
-    if current == 2:
-        if cursor == 0:
-            cursor = 2
-        else:
-            cursor = cursor - 1
-    elif current == 3:
-        if cursor == 0:
-            cursor = 4
-        else:
-            cursor = cursor - 1
-    elif current == 6:
-        if cursor == 0:
-            cursor = 1
-        else:
-            cursor = cursor - 1
-def arrowUp():
-    if current == 2:
-        if cursor == 2:
-            cursor = 0
-        else:
-            cursor = cursor + 1
-    elif current == 3:
-        if cursor == 4:
-            cursor = 0
-        else:
-            cursor = cursor + 1
-    elif current == 6:
-        if cursor == 1:
-            cursor = 0
-        else:
-            cursor = cursor + 1
-def number1():
-    if current == 3:
-        if program1 != "":
-            if memory == "16MB":
-                playsound(error)
-                msgBox("#","Memory overflow.")
-                spareint = random.randint(0,99)
-                if spareint == 0:
-                    cls()
-                    print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
-                    input("Press \u21a9(Return) to continue...")
-                    isWorking = False
-                    loggedOn = False                            
-            else:
-                executingNow = 2
-                program2 = "About"
-                current = 1
-        else:
-            executingNow = 1
-            program1 = "About"
-            current = 1
-    elif current == 7:
-        current = 0
-        executingNow = 0
-    elif current == 2:
-        num1 = int(textInput("Enter a number","1st number"))
-    elif current == 4:
-        if bought != True:
-            if current == 4:
-                if memory == "16MB":
-                    if ptsAmount >= 500:
-                        with open(pathRam,mode="w+") as RamFile2:
-                            RamFile2.write("2")
-                        memory = "32MB"
-                        print("Thank you for puchasing our product!")
-                if memory == "32MB":
-                    if ptsAmount >= 1000:
-                        with open(pathRam,mode="w+") as RamFile2:
-                            RamFile2.write("3")
-                        memory = "64MB"
-                        bought = True
-                        print("Thank you for puchasing our product!")                            
-                else:
-                    print("Error! Not enoungh points!")         
-
-def number2():
-    if current == 3:
-        if program1 != "":
-            if memory == "16MB":
-                playsound(error)
-                msgBox("#","Memory overflow.")
-                spareint = random.randint(0,99)
-                if spareint == 0:
-                    cls()
-                    print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
-                    input("Press \u21a9(Return) to continue...")
-                    isWorking = False
-                    loggedOn = False                               
-            else:
-                executingNow = 2
-                program2 = "Calc"
-                current = 2
-        else:
-            executingNow = 1
-            program1 = "Calc"
-            current = 2
-    elif current == 4:
-        if bought1 != True:
-            if current == 4:
-                if ptsAmount >= 1000:
-                    with open(pathProc,mode="w+") as ProcFile2:
-                        ProcFile2.write("2")                            
-                    processor = 2
-                    bought1 = True        
-    elif current == 7:
-        if program1 == "About":
-            current = 1
-        elif program1 == "Calc":
-            current = 2
-        elif program1 == "Upgrade":
-            current = 4 
-        elif program1 == "SP":
-            current = 5
-        elif program1 == "Settings":
-            current = 6
-        executingNow = 1    
-    elif current == 2:
-        num2 = int(textInput("Enter a number","2nd number"))
-
-def number3():
-    if current == 3:
-        if not(currentUser == 0):
-            if program1 != "":
-                if memory == "16MB":
-                    playsound(error)
-                    msgBox("#","Memory overflow.")
-                    spareint = random.randint(0,99)
-                    if spareint == 0:
-                        cls()
-                        print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
-                        input("Press \u21a9(Return) to continue...")
-                        isWorking = False
-                        loggedOn = False         
-                else:
-                    executingNow = 2
-                    program2 = "Upgrade"
-                    current = 4
-            else:
-                executingNow = 1
-                program1 = "Upgrade"
-                current = 4
-        else:
-            print("You have no permission to run this program.")
-            print("To run this program, log in as",username)
-            input("Awating input...")
-    elif current == 4:
-        if bought2 != True and bought == False and bought1 == False:
-            if current == 4:
-                if ptsAmount >= 1500:
-                    with open(pathSound,mode="w+") as SoundFile2:
-                        SoundFile2.write("1")                            
-                    sound = 1
-                    bought1 = True
-                    print("Thank you for puchasing our product!")
-                else:
-                    print("Error! Not enoungh points!")         
-    elif current == 7:
-        if program2 == "About":
-            current = 1
-        elif program2 == "Calc":
-            current = 2
-        elif program2 == "Upgrade":
-            current = 4 
-        elif program2 == "SP":
-            current = 5
-        elif program2 == "Settings":
-            current = 6
-        executingNow = 2
-    elif current == 2:
-        op = textInput("Enter operation","Operation(+/-)")
-        if op == "+":
-            operation = "+"
-        elif op == "-":
-            operation = "-"
-        else:
-            print("Wrong operation! Command cancelled.")        
-
-def number4():
-    if program1 != "":
-        if memory == "16MB":
-            playsound(error)
-            msgBox("#","Memory overflow.")
-            spareint = random.randint(0,99)
-            if spareint == 0:
-                cls()
-                print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
-                input("Press \u21a9(Return) to continue...")
-                isWorking = False
-                loggedOn = False
-                
-        else:
-            executingNow = 2
-            program2 = "SP" 
-            current = 5
-    else:
-        executingNow = 1
-        program1 = "SP"
-        current = 5    
-
-def number5():
-    if current == 3:
-        if not(currentUser == 0):
-            if program1 != "":
-                if memory == "16MB":
-                    playsound(error)
-                    msgBox("#","Memory overflow.")
-                    spareint = random.randint(0,99)
-                    if spareint == 0:
-                        cls()
-                        print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
-                        input("Press \u21a9(Return) to continue...")
-                        isWorking = False
-                        loggedOn = False                                  
-                else:
-                    executingNow = 2
-                    program2 = "Settings"
-                    current = 6
-            else:
-                executingNow = 1
-                program1 = "Settings"
-                current = 6   
-        else:
-            print("You have no permission to run this program.")
-            print("To run this program, log in as",username)
-            input("Awating input...")        
-
-def keyA():
-    if current == 5:
-        isAlpha = name.isalpha
-        
-        if isAlpha and "TD" in os:
-            print("Valid! +10 pts!")
-            input("Hit ENTER to continue..")
-            ptsAmount = ptsAmount + 10
-        else:
-            print("Not valid! -5 pts!")
-            input("Hit ENTER to continue..")
-            ptsAmount = ptsAmount - 5
-        alreadyChecked = True        
-    
-def keyD():
-    if current == 5:
-        isAlpha = name.isalpha
-        if isAlpha and not("TD" in os):
-            print("Valid! +10 pts!")
-            input("Hit ENTER to continue..")
-            ptsAmount = ptsAmount + 10
-        else:
-            print("Not valid! -5 pts!")
-            input("Hit ENTER to continue..")
-            ptsAmount = ptsAmount - 5
-        alreadyChecked = True        
+                current = 6  
+"""      
+       
 def logon(name):
     cls()
     print("            Tangerine Desktop ",version)
@@ -873,8 +504,316 @@ while machineWorking:
             print(u"\u2550"*6+u"\u2566"+u"\u2550"+"Dock"+u"\u2550"*43)            
             print("  TD  "+u"\u2551"+"Shutdown Reboot Programs Tasks")
             print(version[0:3]+"  "+u"\u2551"+"This is beta. It may contain bugs")  
-            inp = textInput("Awating input...","Command")
-            inputCheck(inp)                    
+            letter = textInput("Awating input...","Command")
+            try:letter = letter.lower() 
+            except:do_nothing()
+            if letter == "a" or letter == "approve":
+                if current == 5:
+                    isAlpha = name.isalpha
+                    
+                    if isAlpha and "TD" in os:
+                        print("Valid! +10 pts!")
+                        input("Hit ENTER to continue..")
+                        ptsAmount = ptsAmount + 10
+                    else:
+                        print("Not valid! -5 pts!")
+                        input("Hit ENTER to continue..")
+                        ptsAmount = ptsAmount - 5
+                    alreadyChecked = True        
+                    
+            elif letter == "d" or letter == "deny":
+                if current == 5:
+                    isAlpha = name.isalpha
+                    if isAlpha and not("TD" in os):
+                        print("Valid! +10 pts!")
+                        input("Hit ENTER to continue..")
+                        ptsAmount = ptsAmount + 10
+                    else:
+                        print("Not valid! -5 pts!")
+                        input("Hit ENTER to continue..")
+                        ptsAmount = ptsAmount - 5
+                    alreadyChecked = True         
+            elif letter == "c" or letter == "close" :
+                if current == 3:
+                            if executingNow == 0:
+                                current = 0
+                            elif executingNow == 1:
+                                if program1 == "About":
+                                    currrent = 1
+                                elif program1 == "Calc":
+                                    current = 2
+                                elif program1 == "Upgrade":
+                                    current = 4
+                                elif program1 == "SP":
+                                    current = 5
+                                elif program1 == "Settings":
+                                    current = 6
+                            elif executingNow == 2:
+                                if program2 == "About":
+                                    currrent = 1
+                                elif program2 == "Calc":
+                                    current = 2
+                                elif program2 == "Upgrade":
+                                    current = 4
+                                elif program2 == "DevCity":
+                                    current = 5
+                                elif program2 == "SP":
+                                    current = 6
+                elif current == 5:
+                        alreadyChecked = False
+                        if current != 0 and current !=2:
+                            current = 0
+                            if executingNow == 1:
+                                executingNow = 0
+                                if program2 != "":
+                                    program1 = program2
+                                    program2 = ""
+                                else:
+                                    program1 = ""
+                                
+                elif current == 2:
+                            current = 0
+                            num1 = 0
+                            num2 = 0
+                            operation = "+"
+                            if executingNow == 1:
+                                executingNow = 0
+                                if program2 != "":
+                                    program1 = program2
+                                    program2 = ""
+                                else:
+                                    program1 = ""            
+                            else:
+                                ask = textInput("Required confirmation","Shutdown system?(Y/N)")
+                                if ask == "Y" or ask == "y":
+                                    isWorking = False
+                                    
+                                    machineWorking = False
+                                else:
+                                    print("Canceled.")                    
+            elif letter == "1":
+                if current == 3:
+                    if program1 != "":
+                        if memory == "16MB":
+                            playsound(error)
+                            msgBox("#","Memory overflow.")
+                            spareint = random.randint(0,99)
+                            if spareint == 0:
+                                cls()
+                                print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
+                                input("Press \u21a9(Return) to continue...")
+                                isWorking = False
+                                loggedOn = False                            
+                        else:
+                            executingNow = 2
+                            program2 = "About"
+                            current = 1
+                    else:
+                        executingNow = 1
+                        program1 = "About"
+                        current = 1
+                elif current == 7:
+                    current = 0
+                    executingNow = 0
+                elif current == 2:
+                    num1 = int(textInput("Enter a number","1st number"))
+                elif current == 4:
+                    if bought != True:
+                        if current == 4:
+                            if memory == "16MB":
+                                if ptsAmount >= 500:
+                                    with open(pathRam,mode="w+") as RamFile2:
+                                        RamFile2.write("2")
+                                    memory = "32MB"
+                                    print("Thank you for puchasing our product!")
+                            if memory == "32MB":
+                                if ptsAmount >= 1000:
+                                    with open(pathRam,mode="w+") as RamFile2:
+                                        RamFile2.write("3")
+                                    memory = "64MB"
+                                    bought = True
+                                    print("Thank you for puchasing our product!")                            
+                            else:
+                                print("Error! Not enoungh points!")          
+            elif letter == "2":
+                if current == 3:
+                    if program1 != "":
+                        if memory == "16MB":
+                            playsound(error)
+                            msgBox("#","Memory overflow.")
+                            spareint = random.randint(0,99)
+                            if spareint == 0:
+                                cls()
+                                print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
+                                input("Press \u21a9(Return) to continue...")
+                                isWorking = False
+                                loggedOn = False                               
+                        else:
+                            executingNow = 2
+                            program2 = "Calc"
+                            current = 2
+                    else:
+                        executingNow = 1
+                        program1 = "Calc"
+                        current = 2
+                elif current == 4:
+                    if bought1 != True:
+                        if current == 4:
+                            if ptsAmount >= 1000:
+                                with open(pathProc,mode="w+") as ProcFile2:
+                                    ProcFile2.write("2")                            
+                                processor = 2
+                                bought1 = True        
+                elif current == 7:
+                    if program1 == "About":
+                        current = 1
+                    elif program1 == "Calc":
+                        current = 2
+                    elif program1 == "Upgrade":
+                        current = 4 
+                    elif program1 == "SP":
+                        current = 5
+                    elif program1 == "Settings":
+                        current = 6
+                    executingNow = 1    
+                elif current == 2:
+                    num2 = int(textInput("Enter a number","2nd number"))
+                
+            elif letter == "3":
+                if current == 3:
+                    if not(currentUser == 0):
+                        if program1 != "":
+                            if memory == "16MB":
+                                playsound(error)
+                                msgBox("#","Memory overflow.")
+                                spareint = random.randint(0,99)
+                                if spareint == 0:
+                                    cls()
+                                    print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
+                                    input("Press \u21a9(Return) to continue...")
+                                    isWorking = False
+                                    loggedOn = False         
+                            else:
+                                executingNow = 2
+                                program2 = "Upgrade"
+                                current = 4
+                        else:
+                            executingNow = 1
+                            program1 = "Upgrade"
+                            current = 4
+                    else:
+                        print("You have no permission to run this program.")
+                        print("To run this program, log in as",username)
+                        input("Awating input...")            
+            elif current == 4:
+                if bought2 != True and bought == False and bought1 == False:
+                    if current == 4:
+                        if ptsAmount >= 1500:
+                            with open(pathSound,mode="w+") as SoundFile2:
+                                SoundFile2.write("1")                            
+                            sound = 1
+                            bought1 = True
+                            print("Thank you for puchasing our product!")
+                        else:
+                            print("Error! Not enoungh points!")         
+            elif current == 7:
+                if program2 == "About":
+                    current = 1
+                elif program2 == "Calc":
+                    current = 2
+                elif program2 == "Upgrade":
+                    current = 4 
+                elif program2 == "SP":
+                    current = 5
+                elif program2 == "Settings":
+                    current = 6
+                executingNow = 2
+            elif current == 2:
+                op = textInput("Enter operation","Operation(+/-)")
+                if op == "+":
+                    operation = "+"
+                elif op == "-":
+                    operation = "-"
+                else:
+                    print("Wrong operation! Command cancelled.")
+                    
+            elif letter == "4":
+                if current == 3:
+                    if program1 != "":
+                        if memory == "16MB":
+                            playsound(error)
+                            msgBox("#","Memory overflow.")
+                            spareint = random.randint(0,99)
+                            if spareint == 0:
+                                cls()
+                                print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
+                                input("Press \u21a9(Return) to continue...")
+                                isWorking = False
+                                loggedOn = False
+                                
+                        else:
+                            executingNow = 2
+                            program2 = "SP" 
+                            current = 5
+                    else:
+                        executingNow = 1
+                        program1 = "SP"
+                        current = 5             
+            elif letter == "5":
+                if current == 3:
+                    if not(currentUser == 0):
+                        if program1 != "":
+                            if memory == "16MB":
+                                playsound(error)
+                                msgBox("#","Memory overflow.")
+                                spareint = random.randint(0,99)
+                                if spareint == 0:
+                                    cls()
+                                    print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
+                                    input("Press \u21a9(Return) to continue...")
+                                    isWorking = False
+                                    loggedOn = False                                  
+                            else:
+                                executingNow = 2
+                                program2 = "Settings"
+                                current = 6
+                        else:
+                            executingNow = 1
+                            program1 = "Settings"
+                            current = 6   
+                    else:
+                        print("You have no permission to run this program.")
+                        print("To run this program, log in as",username)
+                        input("Awating input...")          
+            elif letter == "h" or letter == "help":
+                if current == 0:
+                    window("Buttons to push","Up/Down : select","c : close stuff","s : shutdown","h : help in programs")
+                    sleep(10)
+                    input("Hit Enter")
+                elif current == 2:
+                    window("Help for Calculator","Select item to change (Up/Down keys)","Use Enter/Return key to edit.","Credits : Luigi180059","          aka Luigi64-Dev")
+                    sleep(10)
+                    input("Hit dat Enter button!")
+                elif current == 5:
+                    window("Help for Settings, please!","a : approve", "d : deny", "c : close window")
+                    sleep(10)
+                    input("Press Enter/Return")
+                        
+            elif letter == "p" or letter == "progs" or letter == "programs":
+                curennt = 3 
+            elif letter == "s" or letter == "shutdown" or letter == "r" or letter == "reboot":
+                ask = textInput("Required confirmation","(S)hutdown/(R)eboot?")
+                try:ask = ask.lower()
+                except:do_nothing()
+                if ask == "s" or ask == "shutdown":
+                    isWorking = False           
+                    machineWorking = False
+                    window("","Shutting down...","")
+                    sleep(3)
+                elif ask == "r" or ask == "reboot":
+                    isWorking = False
+                    window("","Rebooting...","")
+                    sleep(3)                               
 
 if isInstalled == 0:
     cls()
