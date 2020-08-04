@@ -157,7 +157,7 @@ def do_nothing():
 #6 : Settings/Preferences
 #7 : Task window
 current = 0
-version = "4.0 Beta 2.5"
+version = "4.0 Beta 2.6"
 pathFolder = str(Path().absolute())
 kernel = platform.system()
 try:
