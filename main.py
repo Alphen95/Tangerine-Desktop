@@ -872,7 +872,7 @@ while machineWorking:
                 window("Tasks","Type number to switch","1 Desktop",spareStr,spareStr1,"'esc' to close")
             print(u"\u2550"*6+u"\u2566"+u"\u2550"+"Dock"+u"\u2550"*43)            
             print("  TD  "+u"\u2551"+"Shutdown Reboot Programs Tasks")
-            print(version+u"\u2551"+"This is beta. It may contain bugs")  
+            print(version[0:3]+"  "+u"\u2551"+"This is beta. It may contain bugs")  
             inp = textInput("Awating input...","Command")
             inputCheck(inp)                    
 
@@ -945,7 +945,7 @@ if isInstalled == 0:
             with open(pathRam, mode="w") as tmpfile:
                 tmpfile.write("1")
             with open(pathSound, mode="w") as tmpfile:
-                tmpfile.write("1")
+                tmpfile.write("0")
             with open(pathName, mode="w") as tmpfile:
                 tmpfile.write("User")
             with open(pathPassword, mode="w") as tmpfile:
