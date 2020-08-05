@@ -43,6 +43,7 @@ name = ""
 count = 0
 spareint = int
 os = ""
+cake = "delicious!"
 osDict = {"1":"TD 2","2":"TD 1","3":"TD 1.1","4":"TD 2","0":"TD 2","6":"PB 3.14","7":"PB 3.14","8":"PB 95","9":"PB RT 3.62","5":"PB 95"}
 alreadyChecked = True
 logonCycle = True
