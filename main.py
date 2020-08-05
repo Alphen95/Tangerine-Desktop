@@ -50,6 +50,7 @@ logonCycle = True
 loggedOn = False
 kernel = "Darwin"
 pathFolder = "/Users/luigi/"
+pathTheme = ""
 pathRam = ""
 pathPts = ""
 pathProc = ""
@@ -66,6 +67,7 @@ sound = 0
 startup = ""
 error = ""
 cursor = 0
+theme = ""
 #function block start
 
 try:
@@ -169,6 +171,7 @@ try:
         pathPts = pathFolder + "\\Disk\\System\\pts.txt"
         pathRam = pathFolder + "\\Disk\\System\\ram.txt"
         pathPassword = pathFolder + "\\Disk\\System\\pass.txt"
+        pathTheme = pathFolder + "\\Disk\\System\\theme.txt"
         startup = pathFolder + "\\Disk\\System\\sounds\\startup.mp3"
         error = pathFolder + "\\Disk\\System\\sounds\\error1.mp3"
     else:
@@ -178,6 +181,7 @@ try:
         pathPts = pathFolder + "/Disk/System/pts.txt"
         pathRam = pathFolder + "/Disk/System/ram.txt"
         pathPassword = pathFolder +"/Disk/System/pass.txt"
+        pathTheme = pathFolder +"/Disk/System/theme.txt"
         startup = pathFolder + "/Disk/System/sounds/startup.mp3"
         error = pathFolder + "/Disk/System/sounds/error1.mp3"
     isInstalled = 1
@@ -190,6 +194,8 @@ except:
 try:
     init()
     print(Fore.BLACK+Back.WHITE)
+    with open(pathTheme,mode="r") as f2:
+        theme = f2.read()
     with open(pathSound,mode="r") as file:
         spareStr = file.read()
         sound = int(spareStr)
@@ -250,8 +256,36 @@ while machineWorking:
                 ptsAmount = f1.readline()
         while isWorking:
             cls()
+            if theme == "01":
+                print(Fore.BLACK+Back.WHITE+"")
+            elif theme == "02":
+                print(Fore.BLACK+Back.RED+"")
+            elif theme == "03":
+                print(Fore.BLACK+Back.GREEN+"")
+            elif theme == "04":
+                print(Fore.BLACK+Back.BLUE+"")
+            elif theme == "05":
+                print(Fore.BLACK+Back.YELLOW+"")
+            elif theme == "06":
+                print(Fore.BLACK+Back.CYAN+"")
+            elif theme == "07":
+                print(Fore.BLACK+Back.MAGENTA+"")
+            elif theme == "11":
+                print(Fore.WHITE+Back.BLACK+"")
+            elif theme == "12":
+                print(Fore.WHITE+Back.RED+"")
+            elif theme == "13":
+                print(Fore.WHITE+Back.GREEN+"")
+            elif theme == "14":
+                print(Fore.WHITE+Back.BLUE+"")
+            elif theme == "15":
+                print(Fore.WHITE+Back.YELLOW+"")
+            elif theme == "16":
+                print(Fore.WHITE+Back.CYAN+"")
+            elif theme == "17":
+                print(Fore.WHITE+Back.MAGENTA+"")  
             if current == 0:
-                window("Tangerine Desktop","[C:]","","","","","")
+                window("Tangerine Desktop","","","","","","")
             if current == 1:
                 spareStr2 = "Version:" + version
                 if processor == 1:
@@ -261,17 +295,15 @@ while machineWorking:
                 spareStr1 = "meRAM " + memory
                 window("About TD",spareStr2,spareStr,spareStr1)
             if current == 2:
-                spareStr = "1st number : "+str(num1)
-                spareStr1 = "2nd number : "+str(num2)
-                spareStr2 = "Operation : "+operation
+                spareStr = "(key 1)1st number : "+str(num1)
+                spareStr1 = "(key 2)2nd number : "+str(num2)
+                spareStr2 = "(key 3)Operation : "+operation
                 if operation == "+":
                     answer = num1 + num2
                 elif operation == "-":
                     answer = num1 - num2
                 spareStr3 = "Answer : "+str(answer)
-                window("Calculator",spareStr,spareStr1,spareStr2,spareStr3)
-                print(answer)
-                print("To get help, print: help calc")
+                window("Calculator",spareStr,spareStr1,spareStr2,spareStr3,"to get help, type 'h'")
             if current == 3:
                 if currentUser == 0:
                     spareStr = "Current user : Guest"
@@ -280,20 +312,20 @@ while machineWorking:
                 window("Programs",spareStr,"Hit esc to exit","S for shutdown/restart","1 : About","2 : Calculator","3 : Hardware Upgrade","4 : Settings, please!","5 : Settings")
             if current == 4:
                 if memory == "16MB":
-                    spareStr = "Avalible - Print *buy_1* to puchase it.Cost : 500 pts"
+                    spareStr = "Avalible - Type '1' to puchase it.Cost : 500 pts"
                     spareStr2 = "32 MB meRAM"
                 elif memory == "32MB":
-                    spareStr = "Avalible - Print *buy_1* to puchase it.Cost : 1000 pts"
+                    spareStr = "Avalible - Type '1' to puchase it.Cost : 1000 pts"
                     spareStr2 = "64 MB meRAM"                    
                 else:
                     spareStr = "Not avalible =("
                     spareStr2 = "96 MB meRAM"
                 if processor != 1:
-                    spareStr1 = "Avalible - Print *buy_2* to puchase it.Cost : 1000 pts"
+                    spareStr1 = "Avalible - Type '2' to puchase it.Cost : 1000 pts"
                 else:
                     spareStr1 = "Not avalible =("
                 if bought == False & bought1 == False:
-                    spareStr3 = "MusicBlaster 1"
+                    spareStr3 = "MusicBlaster 1 - Type '3' to puchase it. Cost: 1500 pts"
                     
                 window("Hardware upgrade",spareStr2,spareStr,"AMB C6 178 MhZ",spareStr1)
             if current == 5:
@@ -304,7 +336,7 @@ while machineWorking:
                         upperBorder = 86
                         usefulInteger = 0
                     else:
-                        upperBorder = 62
+                        upperBorder = 52
                         usefulInteger = usefulInteger + 1
                     while count < 16:
                         spareint = random.randint(1,upperBorder)
@@ -490,7 +522,8 @@ while machineWorking:
                 
             if current == 6:
                 spareStr = "Username:"+username
-                window("Settings",spareStr,"{Change}")
+                spareStr1 = "Theme:"+theme
+                window("Settings",spareStr,"[Change:1]",spareStr1,"[Change:2]")
             if current == 7:
                 #Window list
                 if program1 !="":
@@ -628,6 +661,10 @@ while machineWorking:
                     executingNow = 0
                 elif current == 2:
                     num1 = int(textInput("Enter a number","1st number"))
+                elif current == 6:
+                    username = textInput("Enter username","Enter new username")
+                    with open(pathName,mode="w") as tmpfile:
+                        tmpfile.write(username)
                 elif current == 4:
                     if bought != True:
                         if current == 4:
@@ -699,6 +736,27 @@ while machineWorking:
                     executingNow = 1    
                 elif current == 2:
                     num2 = int(textInput("Enter a number","2nd number"))
+                elif current == 6:
+                    window("Colors","0:Black","1:White")
+                    ask = textInput("Input","Text color:")
+                    if ask == "1":
+                        theme = "1"
+                        window("Colors","1:Black","2:Red","3:Blue","4:Green","5:Yellow","6:Cyan","7:Magenta")
+                        ask = textInput("Input","Background color:")
+                        if ask == "1" or ask == "2" or ask == "3" or ask == "4" or ask == "5" or ask == "6" or ask == "7":
+                            theme = theme + ask
+                        else:
+                            theme = theme + "1"
+                    else:
+                        theme = "0"
+                        window("Colors","1:Black","2:Red","3:Green","4:Blue","5:Yellow","6:Cyan","7:Magenta")
+                        ask = textInput("Input","Background color:")
+                        if ask == "1" or ask == "2" or ask == "3" or ask == "4" or ask == "5" or ask == "6" or ask == "7":
+                            theme = theme + ask
+                        else:
+                            theme = theme + "1" 
+                    with open(pathTheme,mode="w") as f:
+                        f.write(theme)                    
                 
             elif letter == "3":
                 if current == 3:
@@ -836,11 +894,6 @@ while machineWorking:
                         print("You have no permission to run this program.")
                         print("To run this program, log in as",username)
                         input("Awating input...") 
-            elif letter == "change":
-                if current == 5:
-                    username = textInput("Rename user")
-                    with open(pathName,mode="w")as f:
-                        f.write(username)
             elif letter == "h" or letter == "help":
                 if current == 0:
                     window("Buttons to push","Up/Down : select","c : close stuff","s : shutdown","h : help in programs")
@@ -918,6 +971,7 @@ if isInstalled == 0:
                 pathPts = pathFolder + "\\Disk\\System\\pts.txt"
                 pathRam = pathFolder + "\\Disk\\System\\ram.txt"
                 pathPassword = pathFolder + "\\Disk\\System\\pass.txt"
+                pathTheme = pathFolder + "\\Disk\\System\\theme.txt"
                 startup = pathFolder + "\\Disk\\System\\sounds\\startup.mp3"
                 error = pathFolder + "\\Disk\\System\\sounds\\error1.mp3"
                 installPath1 = Path(pathFolder +"\\startup.mp3")
@@ -928,6 +982,7 @@ if isInstalled == 0:
                 pathProc = pathFolder + "/Disk/System/proc.txt"
                 pathPts = pathFolder + "/Disk/System/pts.txt"
                 pathRam = pathFolder + "/Disk/System/ram.txt"
+                pathTheme = pathFolder + "/Disk/System/theme.txt"
                 pathPassword = pathFolder +"/Disk/System/pass.txt"
                 startup = pathFolder + "/Disk/System/sounds/startup.mp3"
                 error = pathFolder + "/Disk/System/sounds/error1.mp3"
@@ -935,19 +990,48 @@ if isInstalled == 0:
                 installPath2 = Path(pathFolder +"/error1.mp3")               
             with open(pathProc, mode="w") as tmpfile:
                 tmpfile.write("1")
+            sleep(1)
+            cls()
+            input("Now insert 'Tangerine Desktop Installation Disk #1' and press Enter.")
+            cls()
+            window("Installing...","10% complete")
             with open(pathRam, mode="w") as tmpfile:
                 tmpfile.write("1")
+            sleep(1)
+            cls()
+            window("Installing...","25% complete")
             with open(pathSound, mode="w") as tmpfile:
                 tmpfile.write("0")
+            sleep(1)
+            cls()
+            window("Installing...","45% complete")
+            cls()
+            input("Insert 'Tangerine Desktop Installation Disk #2' and press Enter.")
             with open(pathName, mode="w") as tmpfile:
                 tmpfile.write("User")
+            sleep(1)
+            cls()
+            window("Installing...","60% complete")
             with open(pathPassword, mode="w") as tmpfile:
-                tmpfile.write("")
+                tmpfile.write("cake = delicious")
+            sleep(1)
+            cls()
+            window("Installing...","80% complete")
+            input("Insert 'Tangerine Desktop Installation Disk #2' and press Enter.")
             with open(pathPts, mode="w") as tmpfile:
                 tmpfile.write("100")
+            sleep(1)
+            cls()
+            window("Installing...","100% complete")
+            with open(pathTheme, mode="w") as tmpfile:
+                tmpfile.write("01")
             shutil.copyfile(installPath2,error)
             shutil.copyfile(installPath1,startup)
             sleep(2)
+            cls()
+            window("Installing...","100% complete")
+            input("Remove disks from floppy drives.")
+            cls()
             window("Congrats!","You have succesfuly installed TD!","Script will stop in 5 seconds")
             sleep(5)
             break
@@ -955,4 +1039,4 @@ if isInstalled == 0:
     window("","Installation is finished")
     sleep(1)
 cls()    
-window("Bye!","Now you can safely end your Python session.")
+window("Bye!","Now you can safely end your session.")
