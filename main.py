@@ -160,7 +160,7 @@ def do_nothing():
 #6 : Settings/Preferences
 #7 : Task window
 current = 0
-version = "4.0 Beta 2.6"
+version = "4.0 Beta 2.7"
 pathFolder = str(Path().absolute())
 kernel = platform.system()
 try:
@@ -309,7 +309,7 @@ while machineWorking:
                     spareStr = "Current user : Guest"
                 else:
                     spareStr = "Current user : " + username
-                window("Programs",spareStr,"Hit esc to exit","S for shutdown/restart","1 : About","2 : Calculator","3 : Hardware Upgrade","4 : Settings, please!","5 : Settings")
+                window("Programs",spareStr,"Hit esc to exit","S for shutdown/restart","1 : About","2 : Calculator","3 : Hardware Upgrade","4 : Settings, please!","5 : Settings","6 : Compy(unfinished)")
             if current == 4:
                 if memory == "16MB":
                     spareStr = "Avalible - Type '1' to puchase it.Cost : 500 pts"
@@ -535,9 +535,13 @@ while machineWorking:
                 else:
                     spareStr1 = ""
                 window("Tasks","Type number to switch","1 Desktop",spareStr,spareStr1,"'esc' to close")
+            if current == 8:
+                drawCompy(".v.")
+                print("Hello there",username)
+                
             print(u"\u2550"*6+u"\u2566"+u"\u2550"+"Dock"+u"\u2550"*43)            
             print("  TD  "+u"\u2551"+"Shutdown Reboot Programs Tasks")
-            print(" "+version[0:3]+"  "+u"\u2551"+"This is beta. It may contain bugs")  
+            print(" "+version[0:4]+" "+u"\u2551"+"This is beta. It may contain bugs")  
             letter = textInput("Awating input...","Command")
             try:letter = letter.lower() 
             except:do_nothing()
@@ -733,6 +737,8 @@ while machineWorking:
                         current = 5
                     elif program1 == "Settings":
                         current = 6
+                    elif program1 == "Compy":
+                        current = 8                    
                     executingNow = 1    
                 elif current == 2:
                     num2 = int(textInput("Enter a number","2nd number"))
@@ -816,6 +822,8 @@ while machineWorking:
                         current = 5
                     elif program2 == "Settings":
                         current = 6
+                    elif program2 == "Compy":
+                        current = 8                    
                     executingNow = 2
                 elif current == 2:
                     op = textInput("Enter operation","Operation(+/-)")
@@ -893,7 +901,43 @@ while machineWorking:
                     else:
                         print("You have no permission to run this program.")
                         print("To run this program, log in as",username)
-                        input("Awating input...") 
+                        input("Awating input...")
+            elif letter == "6":
+                if current == 3:
+                    if not(currentUser == 0):
+                        if program1 != "" and program2 != "":
+                            playsound(error)
+                            msgBox("#","Memory overflow.")
+                            spareint = random.randint(0,99)
+                            if spareint == 0:
+                                cls()
+                                print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
+                                input("Press \u21a9(Return) to continue...")
+                                isWorking = False
+                                loggedOn = False                           
+                        if program1 != "":
+                            if memory == "16MB":
+                                playsound(error)
+                                msgBox("#","Memory overflow.")
+                                spareint = random.randint(0,99)
+                                if spareint == 0:
+                                    cls()
+                                    print("Error name: SEGFAULT\nSorry, but TD experienced a problem.\nIt needs to restart.\nDo not press Ctrl-Alt-Del")
+                                    input("Press \u21a9(Return) to continue...")
+                                    isWorking = False
+                                    loggedOn = False                                  
+                            else:
+                                executingNow = 2
+                                program2 = "Compy"
+                                current = 8
+                        else:
+                            executingNow = 1
+                            program1 = "Compy"
+                            current = 8   
+                    else:
+                        print("You have no permission to run this program.")
+                        print("To run this program, log in as",username)
+                        input("Awating input...")                
             elif letter == "h" or letter == "help":
                 if current == 0:
                     window("Buttons to push","Up/Down : select","c : close stuff","s : shutdown","h : help in programs")
