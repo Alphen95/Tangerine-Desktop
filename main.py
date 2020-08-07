@@ -28,6 +28,8 @@ bought = False
 bought1 = False
 bought2 = False
 counter = 0
+happynes = 0
+counter2 = 0
 ask = ""
 chance = 0
 num = 0
@@ -66,6 +68,7 @@ spareStr5 = ""
 sound = 0
 startup = ""
 error = ""
+shutdown = ""
 cursor = 0
 theme = ""
 #function block start
@@ -149,8 +152,6 @@ def logon(name):
 def do_nothing():
     return None
             
-#Hey! You looking at my code!
-#Anyways, if you want to modify game, there is progam codes:
 #0 : Desktop
 #1 : About window
 #2 : Calculator
@@ -159,6 +160,7 @@ def do_nothing():
 #5 : Settings, Please!
 #6 : Settings/Preferences
 #7 : Task window
+#8 : Compy(still in development) 
 current = 0
 version = "4.0 Beta 2.7"
 pathFolder = str(Path().absolute())
@@ -174,6 +176,7 @@ try:
         pathTheme = pathFolder + "\\Disk\\System\\theme.txt"
         startup = pathFolder + "\\Disk\\System\\sounds\\startup.mp3"
         error = pathFolder + "\\Disk\\System\\sounds\\error1.mp3"
+        shutdown = pathFolder + "\\Disk\\System\\sounds\\shutdown.mp3"
     else:
         pathName = pathFolder + "/Disk/System/name.txt"
         pathSound = pathFolder + "/Disk/System/sound.txt"
@@ -184,6 +187,7 @@ try:
         pathTheme = pathFolder +"/Disk/System/theme.txt"
         startup = pathFolder + "/Disk/System/sounds/startup.mp3"
         error = pathFolder + "/Disk/System/sounds/error1.mp3"
+        shutdown = pathFolder + "/Disk/System/sounds/shutdown.mp3"
     isInstalled = 1
 except:
     isInstalled = 0
@@ -237,15 +241,14 @@ while machineWorking:
         print('Loading standart applications')
         sleep(2)
         print('Finished loading applictaions')
-        if sound == 1:
-            playsound(startup)
         print("          "+Fore.RED+"\u2554\u2550\u2550\u256c\u2550\u2550\u2557")
         print("          "+Fore.YELLOW+"\u2551     \u2551")
         print("          "+Fore.GREEN+"\u2551     \u2551")
         print("          "+Fore.BLUE+"\u2551     \u2551")
         print("          "+Fore.MAGENTA+"\u255a\u2550\u2550\u2550\u2550\u2550\u255d"+Fore.BLACK)
-        print("            TD",version)
-        sleep(2)
+        print("            TD",version[0:4])
+        if sound == 1:
+            playsound(startup)
         isWorking = True
         loggedOn = False        
         logon(username)
@@ -559,6 +562,8 @@ while machineWorking:
                         ptsAmount = ptsAmount - 5
                     alreadyChecked = True        
                     
+            elif letter == "whatsnew":
+                window("New features","Sounds(required soundcard)","Compy","Theming(eat that icoeye!)","Normal windows")
             elif letter == "d" or letter == "deny":
                 if current == 5:
                     isAlpha = name.isalpha
@@ -951,7 +956,17 @@ while machineWorking:
             elif letter == "t" or letter == "tasks":
                 current = 7
             elif letter == "p" or letter == "progs" or letter == "programs":
-                current = 3 
+                current = 3
+            elif letter == "feed":
+                if counter > 50:
+                    window("yummy!","thank you!")
+                    happynes = happynes + 2
+                    counter2 = 0
+                else:
+                    spareint = random.randint(0,2)
+                    if spareint == 2:
+                        happynes = happynes - 1
+                    window(":(","i'm not hungry!")
             elif letter == "s" or letter == "shutdown" or letter == "r" or letter == "reboot":
                 ask = textInput("Required confirmation","(S)hutdown/(R)eboot?")
                 try:ask = ask.lower()
@@ -960,11 +975,14 @@ while machineWorking:
                     isWorking = False           
                     machineWorking = False
                     window("","Shutting down...","")
-                    sleep(3)
+                    playsound(shutdown)
+                    sleep(1)
                 elif ask == "r" or ask == "reboot":
                     isWorking = False
                     window("","Rebooting...","")
-                    sleep(3)                               
+                    playsound(shutdown)
+                    sleep(1)
+            counter2 = counter2 + 1
 
 if isInstalled == 0:
     cls()
@@ -1020,6 +1038,8 @@ if isInstalled == 0:
                 error = pathFolder + "\\Disk\\System\\sounds\\error1.mp3"
                 installPath1 = Path(pathFolder +"\\startup.mp3")
                 installPath2 = Path(pathFolder +"\\error1.mp3")
+                spareStr = Path(pathFolder +"\\shutdown.mp3")
+                shutdown = pathFolder+ "\\Disk\\System\\sounds\\shutdown.mp3"
             else:
                 pathName = pathFolder + "/Disk/System/name.txt"
                 pathSound = pathFolder + "/Disk/System/sound.txt"
@@ -1031,7 +1051,9 @@ if isInstalled == 0:
                 startup = pathFolder + "/Disk/System/sounds/startup.mp3"
                 error = pathFolder + "/Disk/System/sounds/error1.mp3"
                 installPath1 = Path(pathFolder +"/startup.mp3")
-                installPath2 = Path(pathFolder +"/error1.mp3")               
+                installPath2 = Path(pathFolder +"/error1.mp3")
+                spareStr = Path(pathFolder +"/shutdown.mp3")
+                shutdown = pathFolder + "/Disk/System/sounds/shutdown.mp3"
             with open(pathProc, mode="w") as tmpfile:
                 tmpfile.write("1")
             sleep(1)
@@ -1071,12 +1093,13 @@ if isInstalled == 0:
                 tmpfile.write("01")
             shutil.copyfile(installPath2,error)
             shutil.copyfile(installPath1,startup)
+            shutil.copyfile(installPath2,shutdown)
             sleep(2)
             cls()
             window("Installing...","100% complete")
             input("Remove disks from floppy drives.")
             cls()
-            window("Congrats!","You have succesfuly installed TD!","Script will stop in 5 seconds")
+            window("Congrats!","You have succesfuly installed TD!","Script will stop in 5 seconds","If you want to know what's new","type 'whatsnew'")
             sleep(5)
             break
     cls()
