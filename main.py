@@ -1004,9 +1004,17 @@ while machineWorking:
             
 
 if isInstalled == 0:
+    import shutil
+    if kernel == "Windows":
+        hd = pathFolder + "\\hd.mp3"  
+        floppy = pathFolder+ "\\floppy.mp3"
+    else:
+        floppy = pathFolder + "/floppy.mp3"  
+        hd = pathFolder + "/hd.mp3"  
     cls()
     window("Loading...","Booting up installer...","","uwu installer system 1.0")
-    sleep(5)
+    playsound(floppy)
+    sleep(4)
     window("Welcome!","Welcome to TD 4.0 installation process!","This program will help you install TD easily.")
     input("Press Enter to continue.")
     if kernel == "Windows":
@@ -1018,6 +1026,7 @@ if isInstalled == 0:
         os.rmdir(spareStr)
         os.rmdir(installPath2)
         os.rmdir(installPath1)
+    playsound(floppy)
     while True:
         window("Repartitioning","First, we will repartition your disk.","Type 1 to do auto-formatting","Type 2 to exit installer")
         ask = input("Select mode:")
@@ -1025,9 +1034,11 @@ if isInstalled == 0:
             cls()
             window("","Partitioning 50% complete")
             os.mkdir(installPath1)
+            playsound(hd)
             sleep(1)
             window("","Partitioning 75% complete")
             sleep(1)
+            playsound(hd)
             os.mkdir(installPath2)
             os.mkdir(spareStr)
             window("","Partitioning 100% complete")
