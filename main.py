@@ -69,6 +69,8 @@ sound = 0
 startup = ""
 error = ""
 shutdown = ""
+floppy = ""
+hd = ""
 cursor = 0
 theme = ""
 #function block start
@@ -162,7 +164,7 @@ def do_nothing():
 #7 : Task window
 #8 : Compy(still in development) 
 current = 0
-version = "4.0 Beta 2.7"
+version = "4.0 Beta 2.81"
 pathFolder = str(Path().absolute())
 kernel = platform.system()
 try:
@@ -177,6 +179,7 @@ try:
         startup = pathFolder + "\\Disk\\System\\sounds\\startup.mp3"
         error = pathFolder + "\\Disk\\System\\sounds\\error1.mp3"
         shutdown = pathFolder + "\\Disk\\System\\sounds\\shutdown.mp3"
+        hd = pathFolder + "\\Disk\\System\\sounds\\hard.mp3"
     else:
         pathName = pathFolder + "/Disk/System/name.txt"
         pathSound = pathFolder + "/Disk/System/sound.txt"
@@ -188,6 +191,7 @@ try:
         startup = pathFolder + "/Disk/System/sounds/startup.mp3"
         error = pathFolder + "/Disk/System/sounds/error1.mp3"
         shutdown = pathFolder + "/Disk/System/sounds/shutdown.mp3"
+        hd = pathFolder + "/Disk/System/sounds/hard.mp3"
     isInstalled = 1
 except:
     isInstalled = 0
@@ -637,8 +641,9 @@ while machineWorking:
             elif letter == "1":
                 if current == 3:
                     if program1 != "" and program2 != "":
-                        playsound(error)
                         msgBox("#","Memory overflow.")
+                        if sound == 1:
+                            playsound(error)                        
                         spareint = random.randint(0,99)
                         if spareint == 0:
                             cls()
@@ -648,8 +653,9 @@ while machineWorking:
                             loggedOn = False                          
                     if program1 != "":
                         if memory == "16MB":
-                            playsound(error)
                             msgBox("#","Memory overflow.")
+                            if sound == 1:
+                                playsound(error)
                             spareint = random.randint(0,99)
                             if spareint == 0:
                                 cls()
@@ -695,8 +701,9 @@ while machineWorking:
             elif letter == "2":
                 if current == 3:
                     if program1 != "" and program2 != "":
-                        playsound(error)
                         msgBox("#","Memory overflow.")
+                        if sound == 1:
+                            playsound(error)                        
                         spareint = random.randint(0,99)
                         if spareint == 0:
                             cls()
@@ -706,8 +713,9 @@ while machineWorking:
                             loggedOn = False                       
                     if program1 != "":
                         if memory == "16MB":
-                            playsound(error)
                             msgBox("#","Memory overflow.")
+                            if sound == 1:
+                                playsound(error)                            
                             spareint = random.randint(0,99)
                             if spareint == 0:
                                 cls()
@@ -773,8 +781,9 @@ while machineWorking:
                 if current == 3:
                     if not(currentUser == 0):
                         if program1 != "" and program2 != "":
-                            playsound(error)
                             msgBox("#","Memory overflow.")
+                            if sound == 1:
+                                playsound(error)                            
                             spareint = random.randint(0,99)
                             if spareint == 0:
                                 cls()
@@ -784,8 +793,9 @@ while machineWorking:
                                 loggedOn = False                           
                         if program1 != "":
                             if memory == "16MB":
-                                playsound(error)
                                 msgBox("#","Memory overflow.")
+                                if sound == 1:
+                                    playsound(error)                                
                                 spareint = random.randint(0,99)
                                 if spareint == 0:
                                     cls()
@@ -842,8 +852,9 @@ while machineWorking:
             elif letter == "4":
                 if current == 3:
                     if program1 != "" and program2 != "":
-                        playsound(error)
                         msgBox("#","Memory overflow.")
+                        if sound == 1:
+                            playsound(error)                        
                         spareint = random.randint(0,99)
                         if spareint == 0:
                             cls()
@@ -853,8 +864,9 @@ while machineWorking:
                             loggedOn = False                       
                     if program1 != "":
                         if memory == "16MB":
-                            playsound(error)
                             msgBox("#","Memory overflow.")
+                            if sound == 1:
+                                playsound(error)                            
                             spareint = random.randint(0,99)
                             if spareint == 0:
                                 cls()
@@ -875,8 +887,9 @@ while machineWorking:
                 if current == 3:
                     if not(currentUser == 0):
                         if program1 != "" and program2 != "":
-                            playsound(error)
                             msgBox("#","Memory overflow.")
+                            if sound == 1:
+                                playsound(error)                            
                             spareint = random.randint(0,99)
                             if spareint == 0:
                                 cls()
@@ -886,8 +899,9 @@ while machineWorking:
                                 loggedOn = False                           
                         if program1 != "":
                             if memory == "16MB":
-                                playsound(error)
                                 msgBox("#","Memory overflow.")
+                                if sound == 1:
+                                    playsound(error)                                
                                 spareint = random.randint(0,99)
                                 if spareint == 0:
                                     cls()
@@ -911,8 +925,9 @@ while machineWorking:
                 if current == 3:
                     if not(currentUser == 0):
                         if program1 != "" and program2 != "":
-                            playsound(error)
                             msgBox("#","Memory overflow.")
+                            if sound == 1:
+                                playsound(error)                            
                             spareint = random.randint(0,99)
                             if spareint == 0:
                                 cls()
@@ -922,8 +937,9 @@ while machineWorking:
                                 loggedOn = False                           
                         if program1 != "":
                             if memory == "16MB":
-                                playsound(error)
                                 msgBox("#","Memory overflow.")
+                                if sound == 1:
+                                    playsound(error)                                
                                 spareint = random.randint(0,99)
                                 if spareint == 0:
                                     cls()
@@ -983,6 +999,9 @@ while machineWorking:
                     playsound(shutdown)
                     sleep(1)
             counter2 = counter2 + 1
+            if inp != "":
+                playsound(hd)
+            
 
 if isInstalled == 0:
     cls()
@@ -1039,6 +1058,9 @@ if isInstalled == 0:
                 installPath1 = Path(pathFolder +"\\startup.mp3")
                 installPath2 = Path(pathFolder +"\\error1.mp3")
                 spareStr = Path(pathFolder +"\\shutdown.mp3")
+                spareStr1 = Path(pathFolder +"\\hd.mp3")
+                hd = pathFolder+ "\\Disk\\System\\sounds\\hd.mp3"
+                floppy = pathFolder+ "\\floppy.mp3"
                 shutdown = pathFolder+ "\\Disk\\System\\sounds\\shutdown.mp3"
             else:
                 pathName = pathFolder + "/Disk/System/name.txt"
@@ -1053,7 +1075,10 @@ if isInstalled == 0:
                 installPath1 = Path(pathFolder +"/startup.mp3")
                 installPath2 = Path(pathFolder +"/error1.mp3")
                 spareStr = Path(pathFolder +"/shutdown.mp3")
+                spareStr2 = Path(pathFolder +"/hd.mp3")
                 shutdown = pathFolder + "/Disk/System/sounds/shutdown.mp3"
+                hd = pathFolder + "/Disk/System/sounds/hd.mp3"
+                floppy = pathFolder + "/floppy.mp3"
             with open(pathProc, mode="w") as tmpfile:
                 tmpfile.write("1")
             sleep(1)
@@ -1063,38 +1088,41 @@ if isInstalled == 0:
             window("Installing...","10% complete")
             with open(pathRam, mode="w") as tmpfile:
                 tmpfile.write("1")
-            sleep(1)
+            playsound(floppy)
             cls()
             window("Installing...","25% complete")
             with open(pathSound, mode="w") as tmpfile:
                 tmpfile.write("0")
-            sleep(1)
+            playsound(floppy)
             cls()
             window("Installing...","45% complete")
             cls()
             input("Insert 'Tangerine Desktop Installation Disk #2' and press Enter.")
             with open(pathName, mode="w") as tmpfile:
                 tmpfile.write("User")
-            sleep(1)
+            playsound(floppy)
             cls()
             window("Installing...","60% complete")
             with open(pathPassword, mode="w") as tmpfile:
                 tmpfile.write("cake = delicious")
-            sleep(1)
+            playsound(floppy)
             cls()
             window("Installing...","80% complete")
             input("Insert 'Tangerine Desktop Installation Disk #2' and press Enter.")
             with open(pathPts, mode="w") as tmpfile:
                 tmpfile.write("100")
-            sleep(1)
+            playsound(floppy)
             cls()
             window("Installing...","100% complete")
             with open(pathTheme, mode="w") as tmpfile:
                 tmpfile.write("01")
             shutil.copyfile(installPath2,error)
             shutil.copyfile(installPath1,startup)
-            shutil.copyfile(installPath2,shutdown)
-            sleep(2)
+            playsound(floppy)
+            shutil.copyfile(spareStr,shutdown)
+            shutil.copyfile(spareStr2,hd)
+            playsound(floppy)
+            sleep(1)
             cls()
             window("Installing...","100% complete")
             input("Remove disks from floppy drives.")
