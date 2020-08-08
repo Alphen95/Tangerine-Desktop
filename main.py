@@ -28,7 +28,7 @@ bought = False
 bought1 = False
 bought2 = False
 counter = 0
-happynes = 0
+happines = 0
 counter2 = 0
 ask = ""
 chance = 0
@@ -164,7 +164,7 @@ def do_nothing():
 #7 : Task window
 #8 : Compy(still in development) 
 current = 0
-version = "4.0 Beta 2.81"
+version = "4.0 "
 pathFolder = str(Path().absolute())
 kernel = platform.system()
 try:
@@ -545,6 +545,7 @@ while machineWorking:
             if current == 8:
                 drawCompy(".v.")
                 print("Hello there",username)
+                print("My happiness:",happines)
                 
             print(u"\u2550"*6+u"\u2566"+u"\u2550"+"Dock"+u"\u2550"*43)            
             print("  TD  "+u"\u2551"+"Shutdown Reboot Programs Tasks")
@@ -973,16 +974,31 @@ while machineWorking:
                 current = 7
             elif letter == "p" or letter == "progs" or letter == "programs":
                 current = 3
+            elif letter == "play":
+                if current == 8:
+                    if counter2 > 25:
+                        drawCompy("_u_")
+                        spareStr = "i like u, " + username +"!" 
+                        window("i like it!",spareStr)
+                        happines = happines + 1
+                        counter2 = 0
+                    else:
+                        spareint = random.randint(0,2)
+                        if spareint == 2:
+                            happines = happines - 1
+                        window(":/","i'm not bored!")                 
             elif letter == "feed":
-                if counter > 50:
-                    window("yummy!","thank you!")
-                    happynes = happynes + 2
-                    counter2 = 0
-                else:
-                    spareint = random.randint(0,2)
-                    if spareint == 2:
-                        happynes = happynes - 1
-                    window(":(","i'm not hungry!")
+                if current == 8:
+                    if counter2 > 50:
+                        drawCompy("owo")
+                        window("yummy!","thank you!")
+                        happines = happines + 2
+                        counter2 = 0
+                    else:
+                        spareint = random.randint(0,2)
+                        if spareint == 2:
+                            happines = happines - 1
+                        window(":(","i'm not hungry!")                    
             elif letter == "s" or letter == "shutdown" or letter == "r" or letter == "reboot":
                 ask = textInput("Required confirmation","(S)hutdown/(R)eboot?")
                 try:ask = ask.lower()
@@ -1052,7 +1068,7 @@ if isInstalled == 0:
         if ask == "2":
             break
         
-        window("Installing","TD 4.0 Beta 2.5 will be installed on 'Disk'","Type 1 to start installation","Type 2 to exit installation.")
+        #window("Installing","TD 4.0 will be installed on 'Disk'","Type 1 to start installation","Type 2 to exit installation.")
         ask = input("Select mode:")
         if ask == "1":
             import shutil
