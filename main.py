@@ -1015,7 +1015,7 @@ while machineWorking:
                     playsound(shutdown)
                     sleep(1)
             counter2 = counter2 + 1
-            if inp != "":
+            if letter != "":
                 playsound(hd)
             
 
@@ -1062,13 +1062,12 @@ if isInstalled == 0:
             break
         if ask == "2":
             break
-    spareStr 
     while True:
         
         if ask == "2":
             break
         
-        #window("Installing","TD 4.0 will be installed on 'Disk'","Type 1 to start installation","Type 2 to exit installation.")
+        window("Installing","TD 4.0 will be installed on 'Disk'","Type 1 to start installation","Type 2 to exit installation.")
         ask = input("Select mode:")
         if ask == "1":
             import shutil
