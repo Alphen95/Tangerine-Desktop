@@ -179,7 +179,7 @@ try:
         startup = pathFolder + "\\Disk\\System\\sounds\\startup.mp3"
         error = pathFolder + "\\Disk\\System\\sounds\\error1.mp3"
         shutdown = pathFolder + "\\Disk\\System\\sounds\\shutdown.mp3"
-        hd = pathFolder + "\\Disk\\System\\sounds\\hard.mp3"
+        hd = pathFolder + "\\Disk\\System\\sounds\\hd.mp3"
     else:
         pathName = pathFolder + "/Disk/System/name.txt"
         pathSound = pathFolder + "/Disk/System/sound.txt"
@@ -191,7 +191,7 @@ try:
         startup = pathFolder + "/Disk/System/sounds/startup.mp3"
         error = pathFolder + "/Disk/System/sounds/error1.mp3"
         shutdown = pathFolder + "/Disk/System/sounds/shutdown.mp3"
-        hd = pathFolder + "/Disk/System/sounds/hard.mp3"
+        hd = pathFolder + "/Disk/System/sounds/hd.mp3"
     isInstalled = 1
 except:
     isInstalled = 0
@@ -553,6 +553,8 @@ while machineWorking:
             letter = textInput("Awating input...","Command")
             try:letter = letter.lower() 
             except:do_nothing()
+            if letter != "":
+                playsound(hd)            
             if letter == "a" or letter == "approve":
                 if current == 5:
                     isAlpha = name.isalpha
@@ -1015,9 +1017,6 @@ while machineWorking:
                     playsound(shutdown)
                     sleep(1)
             counter2 = counter2 + 1
-            if letter != "":
-                playsound(hd)
-            
 
 if isInstalled == 0:
     import shutil
