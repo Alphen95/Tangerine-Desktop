@@ -1042,6 +1042,11 @@ if isInstalled == 0:
         os.rmdir(spareStr)
         os.rmdir(installPath2)
         os.rmdir(installPath1)
+    if os.path.exists(installPath2):
+        os.rmdir(installPath2)
+        os.rmdir(installPath1)
+    if os.path.exists(installPath1):
+        os.rmdir(installPath1)
     playsound(floppy)
     while True:
         window("Repartitioning","First, we will repartition your disk.","Type 1 to do auto-formatting","Type 2 to exit installer")
